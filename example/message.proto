@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package svc.example;
+
+option go_package = "github.com/dungps/protoc-gen-go/example;example";
+
+import "options/annotations.proto";
+
+message SampleForExtend {
+  string name = 1;
+}
+
+//message Sample {
+//  option (transformer.go_extend_struct) = "SampleForExtend";
+//}
+
+message MapRepeatListSample {
+  map<string, SampleForExtend> test = 1 [ (transformer.map_value_repeat) = true ];
+  SampleForExtend sample_for_extend = 2 [ (transformer.is_extend_struct) = true ];
+}
